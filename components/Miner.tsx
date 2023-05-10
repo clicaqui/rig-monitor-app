@@ -1,15 +1,26 @@
 import { Pressable, Text, View, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { GlobalStyles } from '../constants/styles';
 
 const Miner = (props:any) => {
+    const navigation = useNavigation();
+    const minerPressHandler = () => {
+        console.log(props.data?.identifier);
+        navigation.navigate('MinerDetails', {
+                miner: props.data,
+        });
+    }
     return (
-        <Pressable>
+        <Pressable
+            onPress={minerPressHandler}>
             <View style={styles.minerItem}>
-                <Text style={styles.identity}>{props.data.identifier}</Text>
-                <Text style={styles.share}>{props.data.hashrate}</Text>
-            </View>
-            <View style={styles.timeContainer}>
-                <Text style={styles.time}>{props.data.sharetime}</Text>
+                <View>
+                    <Text style={styles.identity}>{props.data.identifier}</Text>
+                    <Text style={styles.share}>{props.data.accepted}</Text>
+                </View>
+                <View style={styles.timeContainer}>
+                    <Text style={styles.time}>{(props.data.hashrate / 1000).toFixed(2)}</Text>
+                </View>
             </View>
         </Pressable>
     );
@@ -47,7 +58,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 4,
-
+        minWidth: 80
    },
    time: {
         color: GlobalStyles.colors.primary500,

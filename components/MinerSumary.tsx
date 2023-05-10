@@ -1,12 +1,13 @@
 import { Text, View, StyleSheet } from "react-native";
 import { GlobalStyles } from "../constants/styles";
+import sum from "../util/sum";
 
 
 const MinersList = (props:any) => {
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>Miners: </Text>
-            <Text style={styles.counter}>{props.miners.length}</Text>
+            <Text style={styles.text}>Sumary: </Text>
+            <Text style={styles.counter}>{sum(props.miners)} ({props.miners.length})</Text>
         </View>
     );
 }
@@ -20,7 +21,7 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     text: {
         fontSize: 12,

@@ -5,20 +5,23 @@ import  { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
 import Rig from './screens/Rig';
-import Manager from './screens/Manager';
+import MinerDetails from './screens/MinerDetails';
 import Prices from './screens/Prices';
 import { GlobalStyles } from './constants/styles';
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
-function DetailOverview() {
-  return (<BottomTabs.Navigator screenOptions={{
+function MinerOverview() {
+  return (<BottomTabs.Navigator screenOptions={({ navigation }) => ({
     headerStyle: { backgroundColor: GlobalStyles.colors.primary500},
     headerTintColor: 'white',
     tabBarStyle: { backgroundColor: GlobalStyles.colors.primary500},
-    tabBarActiveTintColor: GlobalStyles.colors.accent500
-  }}>
+    tabBarActiveTintColor: GlobalStyles.colors.accent500,
+    //headerRight: ({ tintColor }) => (
+        
+   // ),
+  })}>
      <BottomTabs.Screen name='Miners' component={Rig} options={{
       title: 'Rig',
       tabBarLabel: 'Rig',
@@ -36,11 +39,16 @@ function DetailOverview() {
 export default function App() {
   return (
     <>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name='Details' component={DetailOverview} options={{  headerShown: false }}/>
-          <Stack.Screen name='Manager' component={Manager} />
+        <Stack.Navigator screenOptions={{
+          headerStyle: {backgroundColor: GlobalStyles.colors.primary500},
+          headerTintColor: 'white'
+        }}>
+          <Stack.Screen name="Home" component={MinerOverview} options={{  headerShown: false }}/>
+          <Stack.Screen name="MinerDetails" component={MinerDetails} options={{
+            presentation: 'modal'
+          }}  />
         </Stack.Navigator>
       </NavigationContainer>
     </>
