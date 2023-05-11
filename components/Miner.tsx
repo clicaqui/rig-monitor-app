@@ -1,6 +1,7 @@
 import { Pressable, Text, View, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { GlobalStyles } from '../constants/styles';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const Miner = (props:any) => {
     const navigation = useNavigation();
@@ -14,13 +15,16 @@ const Miner = (props:any) => {
         <Pressable
             onPress={minerPressHandler}>
             <View style={styles.minerItem}>
+                    
                 <View>
                     <Text style={styles.identity}>{props.data.identifier}</Text>
                     <Text style={styles.share}>{props.data.accepted}</Text>
                 </View>
-                <View style={styles.timeContainer}>
-                    <Text style={styles.time}>{(props.data.hashrate / 1000).toFixed(2)}</Text>
-                </View>
+                <LinearGradient style={styles.timeContainer} start={[0.0,1.0]} end={[1.0, 0.0]} colors={['#19db30' , '#a8d408ee', '#f5dd07', '#f39c04', '#f60000']} >
+                    <View>
+                        <Text style={{color: GlobalStyles.colors.primary500,fontWeight: 'bold',marginLeft: (props.data.hashrate / 1000) < 100 ? (props.data.hashrate / 1000) : 96}}>{(props.data.hashrate / 1000).toFixed(2)}</Text>
+                    </View>
+                </LinearGradient>
             </View>
         </Pressable>
     );
@@ -30,6 +34,7 @@ export default Miner;
 
 const styles = StyleSheet.create({
    minerItem: {
+        flex: 2,
         padding: 12,
         marginVertical: 8,
         backgroundColor: GlobalStyles.colors.primary500,
@@ -54,11 +59,12 @@ const styles = StyleSheet.create({
    timeContainer: {
         paddingHorizontal: 12,
         paddingVertical: 4,
-        backgroundColor: 'white',
+        //backgroundColor: 'white',
         justifyContent: 'center',
-        alignItems: 'center',
+        //alignItems: 'center',
         borderRadius: 4,
-        minWidth: 80
+        minWidth: 180,
+        maxWidth: 180
    },
    time: {
         color: GlobalStyles.colors.primary500,
