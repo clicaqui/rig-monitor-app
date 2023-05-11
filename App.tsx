@@ -8,6 +8,8 @@ import Rig from './screens/Rig';
 import MinerDetails from './screens/MinerDetails';
 import Prices from './screens/Prices';
 import { GlobalStyles } from './constants/styles';
+import RigContextProvider from './store/context/MinerContext';
+import Wallet from './screens/Wallet';
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -25,12 +27,17 @@ function MinerOverview() {
      <BottomTabs.Screen name='Miners' component={Rig} options={{
       title: 'Rig',
       tabBarLabel: 'Rig',
-      tabBarIcon: ({color, size}) => (<Ionicons name="hammer" size={size} color={color} />)
+      tabBarIcon: ({color, size}) => (<Ionicons name="ios-hammer" size={size} color={color} />)
      }}/>
-     <BottomTabs.Screen name='Prices' component={Prices} options={{
+     <BottomTabs.Screen name='Wallet' component={Wallet} options={{
+       title: 'Money Sumary',
+       tabBarLabel: 'Wallet',
+       tabBarIcon: ({color, size}) => (<Ionicons name="wallet" size={size} color={color} />)
+      }}/>
+       <BottomTabs.Screen name='Prices' component={Prices} options={{
        title: 'Mercado',
        tabBarLabel: 'Prices',
-       tabBarIcon: ({color, size}) => (<Ionicons name="wallet" size={size} color={color} />)
+       tabBarIcon: ({color, size}) => (<Ionicons name="ios-analytics" size={size} color={color} />)
       }}/>
   </BottomTabs.Navigator>
   );
@@ -40,17 +47,19 @@ export default function App() {
   return (
     <>
       <StatusBar style="light" />
-      <NavigationContainer>
-        <Stack.Navigator screenOptions={{
-          headerStyle: {backgroundColor: GlobalStyles.colors.primary500},
-          headerTintColor: 'white'
-        }}>
-          <Stack.Screen name="Home" component={MinerOverview} options={{  headerShown: false }}/>
-          <Stack.Screen name="MinerDetails" component={MinerDetails} options={{
-            presentation: 'modal'
-          }}  />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <RigContextProvider>
+        <NavigationContainer>
+          <Stack.Navigator screenOptions={{
+            headerStyle: {backgroundColor: GlobalStyles.colors.primary500},
+            headerTintColor: 'white'
+          }}>
+            <Stack.Screen name="Home" component={MinerOverview} options={{  headerShown: false }}/>
+            <Stack.Screen name="MinerDetails" component={MinerDetails} options={{
+              presentation: 'modal'
+            }}  />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </RigContextProvider>
     </>
   );
 }

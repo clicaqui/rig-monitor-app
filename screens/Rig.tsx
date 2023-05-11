@@ -1,30 +1,18 @@
 import { getMiners } from "../util/http";
 import MinersList from "../components/MinerList";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import MinerSumary from "../components/MinerSumary";
+import { RigContext } from "../store/context/MinerContext";
 
 
 const Rig = (props:any) => {
-    const [lstMiners, setLstMiners] = useState([]);
-    const reload = () =>  {
-        getMiners().then(response => {
-            //console.log(response.result.miners);
-            setLstMiners(response.result.miners);
-        
-        })
-        .catch(err => console.log(err));
-    }        
-    
-    useEffect(() => {
-        reload();
-       
-    },[]);
+    const minersCtx = useContext(RigContext);
 
     return (
         <View style={styles.container}>
-            <MinerSumary miners={lstMiners}/>
-            <MinersList miners={lstMiners} onReload={() => reload()} />
+            <MinerSumary miners={minersCtx.miners}/>
+            <MinersList miners={minersCtx.miners} />
         </View>
     );
 }
