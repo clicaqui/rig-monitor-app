@@ -4,24 +4,27 @@ import { useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import MinerSumary from "../components/MinerSumary";
 
-       
+
 const Rig = (props:any) => {
     const [lstMiners, setLstMiners] = useState([]);
-    
-    useEffect(() => {
+    const reload = () =>  {
         getMiners().then(response => {
             //console.log(response.result.miners);
             setLstMiners(response.result.miners);
-            
+        
         })
         .catch(err => console.log(err));
+    }        
+    
+    useEffect(() => {
+        reload();
        
     },[]);
 
     return (
         <View style={styles.container}>
             <MinerSumary miners={lstMiners}/>
-            <MinersList miners={lstMiners} fetchData={useEffect} />
+            <MinersList miners={lstMiners} onReload={() => reload()} />
         </View>
     );
 }

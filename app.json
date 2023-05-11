@@ -18,7 +18,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.clicaqui.rigapp"
     },
     "android": {
       "adaptiveIcon": {
@@ -28,6 +29,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "46eda4ec-e481-47cd-8158-a3cce6b4ad1a"
+      }
     }
   }
 }

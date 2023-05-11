@@ -6,8 +6,8 @@ import sum from "../util/sum";
 const MinersList = (props:any) => {
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>Sumary: </Text>
-            <Text style={styles.counter}>{sum(props.miners)} ({props.miners.length})</Text>
+            <Text style={styles.text}>Miners: {props.miners.length}</Text>
+            <Text style={styles.counter}>{sum(props.miners)}</Text>
         </View>
     );
 }
