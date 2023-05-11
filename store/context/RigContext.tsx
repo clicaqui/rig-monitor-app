@@ -23,6 +23,9 @@ function RigContextProvider(props:any) {
         setVlrBalance(response.result.balance);
         setLstTransactions(response.result.transactions);
         setPrices(response.result.prices);
+        setTimeout(() => {
+            reload();
+        },5000);
     };
 
     const value = {

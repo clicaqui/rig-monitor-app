@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { View, StyleSheet } from "react-native";
 import { RigContext } from "../store/context/RigContext";
 import CoinCard from "../components/CoinCard";
+import { GlobalStyles } from "../constants/styles";
 
 function Prices() {
     const pricesCtx = useContext(RigContext);
@@ -39,6 +40,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 24,
-        //backgroundColor: GlobalStyles.colors.primary700,
+        backgroundColor: GlobalStyles.colors.primary700,
     }
 });
