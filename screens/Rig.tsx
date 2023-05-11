@@ -3,7 +3,7 @@ import MinersList from "../components/MinerList";
 import { useContext, useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import MinerSumary from "../components/MinerSumary";
-import { RigContext } from "../store/context/MinerContext";
+import { RigContext } from "../store/context/RigContext";
 
 
 const Rig = (props:any) => {

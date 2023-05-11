@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { FlatList, View, StyleSheet } from "react-native";
-import { RigContext } from "../store/context/MinerContext";
-import BalanceCard from "../components/BalanceCard";
+import { RigContext } from "../store/context/RigContext";
+import CoinCard from "../components/CoinCard";
 import TransactionCard from "../components/TransactionCard";
 
 const renderItemHandler = (itemData:any) => {
@@ -11,9 +11,11 @@ const renderItemHandler = (itemData:any) => {
 function Wallet(props:any) {
     const rigContext = useContext(RigContext);
 
+    const DUCO_LOGO = require("../assets/duco.png");
+
     return (
         <View style={styles.container}>
-            <BalanceCard value={rigContext.balance.balance} />
+            <CoinCard value={rigContext.balance.balance} logo={DUCO_LOGO} />
             <FlatList data={rigContext.transactions} renderItem={renderItemHandler} keyExtractor={(item, index) => index} />
         </View>
         );

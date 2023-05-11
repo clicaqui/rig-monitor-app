@@ -11,6 +11,7 @@ function RigContextProvider(props:any) {
     const [lstMiners, setLstMiners] = useState([]);
     const [vlrBalance, setVlrBalance] = useState({});
     const [lstTransactions, setLstTransactions] = useState([]);
+    const [prices, setPrices] = useState([]);
     
     useEffect(() => {
         reload();
@@ -21,12 +22,14 @@ function RigContextProvider(props:any) {
         setLstMiners(response.result.miners);
         setVlrBalance(response.result.balance);
         setLstTransactions(response.result.transactions);
+        setPrices(response.result.prices);
     };
 
     const value = {
         miners: lstMiners,
         balance: vlrBalance,
-        transactions: lstTransactions
+        transactions: lstTransactions,
+        prices: prices
     };
     return (
     <RigContext.Provider value={value}>

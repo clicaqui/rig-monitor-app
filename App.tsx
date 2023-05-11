@@ -8,7 +8,7 @@ import Rig from './screens/Rig';
 import MinerDetails from './screens/MinerDetails';
 import Prices from './screens/Prices';
 import { GlobalStyles } from './constants/styles';
-import RigContextProvider from './store/context/MinerContext';
+import RigContextProvider from './store/context/RigContext';
 import Wallet from './screens/Wallet';
 
 const Stack = createNativeStackNavigator();

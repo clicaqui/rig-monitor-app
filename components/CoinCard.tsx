@@ -1,14 +1,14 @@
-import { Text, View , StyleSheet} from "react-native";
+import { Text, View, Image, StyleSheet} from "react-native";
 import { GlobalStyles } from "../constants/styles";
 
-function BalanceCard(props:any) {
+function CoinCard(props:any) {
     return (<View style={styles.container}>
-    <Text style={styles.text}></Text>
-    <Text style={styles.counter}>{props.value}</Text>
+        <Image source={props.logo} style={styles.logo} />
+    <Text style={styles.value}>{props.value}</Text>
 </View>)
 };
 
-export default BalanceCard;
+export default CoinCard;
 
 const styles = StyleSheet.create({
     container: {
@@ -19,13 +19,13 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
     },
-    text: {
-        fontSize: 12,
-        color: GlobalStyles.colors.primary300
-    },
-    counter: {
+    value: {
         fontSize: 16,
         fontWeight: 'bold',
         color: GlobalStyles.colors.primary500
+    },
+    logo: {
+        width: 24,
+        height: 24
     } 
 });

@@ -4,11 +4,11 @@ import { GlobalStyles } from "../constants/styles";
 function TransactionCard(props:any) {
     return ( <View style={styles.minerItem}>
         <View>
-            <Text style={styles.identity}>{props.memo}</Text>
-            <Text style={styles.share}>{props.date}</Text>
+            <Text style={styles.memo}>{props.memo}</Text>
+            <Text style={styles.date}>{props.date}</Text>
         </View>
-        <View style={styles.timeContainer}>
-            <Text style={styles.time}>{props.amount}</Text>
+        <View style={styles.amountContainer}>
+            <Text style={styles.amount}>{(props.amount).toFixed(4)}</Text>
         </View>
     </View>);
 }
@@ -29,25 +29,22 @@ const styles = StyleSheet.create({
          shadowOffset: {width: 1, height:1},
          shadowOpacity: 0.4
     },
-    identity: {
+    date: {
      color: GlobalStyles.colors.primary50
     },
-    share: {
-         fontSize: 16,
-         marginBottom: 4,
-         fontWeight: 'bold',
+    memo: {
          color: GlobalStyles.colors.accent500
     },
-    timeContainer: {
-         paddingHorizontal: 12,
+    amountContainer: {
+         paddingHorizontal: 10,
          paddingVertical: 4,
          backgroundColor: 'white',
          justifyContent: 'center',
          alignItems: 'center',
          borderRadius: 4,
-         minWidth: 100
+         minWidth: 80
     },
-    time: {
+    amount: {
          color: GlobalStyles.colors.primary500,
          fontWeight: 'bold'
     }
