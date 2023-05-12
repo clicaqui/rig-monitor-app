@@ -3,4 +3,4 @@ Rig monitor to mobile devices
 
 First Press
 
-https://youtu.be/uxhjgQUnHrk
+[https://youtu.be/uxhjgQUnHrk]
