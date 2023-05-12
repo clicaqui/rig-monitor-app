@@ -10,6 +10,7 @@ import Prices from './screens/Prices';
 import { GlobalStyles } from './constants/styles';
 import RigContextProvider from './store/context/RigContext';
 import Wallet from './screens/Wallet';
+import IconButton from './components/UI/IconButton';
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -20,7 +21,7 @@ function MinerOverview() {
     headerTintColor: 'white',
     tabBarStyle: { backgroundColor: GlobalStyles.colors.primary500},
     tabBarActiveTintColor: GlobalStyles.colors.accent500,
-
+     headerRight:  ({tintColor}) => <IconButton icon="settings" size={24} color={tintColor}/>
   })}>
      <BottomTabs.Screen name='Miners' component={Rig} options={{
       title: 'Rig',
@@ -28,12 +29,12 @@ function MinerOverview() {
       tabBarIcon: ({color, size}) => (<Ionicons name="ios-hammer" size={size} color={color} />)
      }}/>
      <BottomTabs.Screen name='Wallet' component={Wallet} options={{
-       title: 'Money Sumary',
+       title: 'Coin Sumary',
        tabBarLabel: 'Wallet',
        tabBarIcon: ({color, size}) => (<Ionicons name="wallet" size={size} color={color} />)
       }}/>
        <BottomTabs.Screen name='Prices' component={Prices} options={{
-       title: 'Mercado',
+       title: 'Merchant',
        tabBarLabel: 'Prices',
        tabBarIcon: ({color, size}) => (<Ionicons name="ios-analytics" size={size} color={color} />)
       }}/>

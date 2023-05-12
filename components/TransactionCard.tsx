@@ -4,11 +4,11 @@ import { GlobalStyles } from "../constants/styles";
 function TransactionCard(props:any) {
     return ( <View style={styles.minerItem}>
         <View>
-            <Text style={styles.memo}>{props.memo}</Text>
+            <Text style={styles.memo}>{(props.memo).substring(0,30)}</Text>
             <Text style={styles.date}>{props.date}</Text>
         </View>
         <View style={styles.amountContainer}>
-            <Text style={styles.amount}>{(props.amount).toFixed(4)}</Text>
+            <Text style={[styles.amount,{color: props.recipient === 'clicaqui' ? '#0c7733' : '#f40a0a'}]}>{props.recipient === 'clicaqui' ? '+' : '-'} {(props.amount).toFixed(4)}</Text>
         </View>
     </View>);
 }
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
          minWidth: 80
     },
     amount: {
-         color: GlobalStyles.colors.primary500,
+         //color: GlobalStyles.colors.primary500,
          fontWeight: 'bold'
     }
  });

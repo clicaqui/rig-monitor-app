@@ -6,7 +6,7 @@ import TransactionCard from "../components/TransactionCard";
 import { GlobalStyles } from "../constants/styles";
 
 const renderItemHandler = (itemData:any) => {
-    return <TransactionCard amount={itemData.item.amount} date={itemData.item.datetime} memo={itemData.item.memo}/>;
+    return <TransactionCard amount={itemData.item.amount} date={itemData.item.datetime} memo={itemData.item.memo} recipient={itemData.item.recipient}/>;
 }
 
 function Wallet(props:any) {
