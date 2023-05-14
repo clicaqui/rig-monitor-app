@@ -1,4 +1,3 @@
-import { getMiners } from "../util/http";
 import MinersList from "../components/MinerList";
 import { useContext, useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";

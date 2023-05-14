@@ -1,6 +1,6 @@
-class Settings {
+export default class Settings {
     constructor(user, limit) {
         this.user = user,
-        this.transactionLimit, limit
+        this.limit = limit
     }
 }

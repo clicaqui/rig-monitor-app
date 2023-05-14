@@ -3,7 +3,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import  { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import AppLoading, { AppLoadingProps } from 'expo-app-loading';
 
 import Rig from './screens/Rig';
 import MinerDetails from './screens/MinerDetails';
@@ -12,9 +11,8 @@ import { GlobalStyles } from './constants/styles';
 import RigContextProvider from './store/context/RigContext';
 import Wallet from './screens/Wallet';
 import IconButton from './components/UI/IconButton';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { init } from './util/database';
-import SettingsScreen from './screens/SettingsForm';
 import SettingsForm from './screens/SettingsForm';
 
 const Stack = createNativeStackNavigator();
@@ -61,7 +59,7 @@ export default function App() {
   },[]);
 
   if (!dbInitializer) {
-    return <AppLoading />
+    return 
   } 
   return (
     <>

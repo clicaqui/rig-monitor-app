@@ -11,7 +11,7 @@ export function init() {
                     transactionLimit INTEGER NOT NULL)`,
             [],
             () => {
-                insertSettings();
+                insertSettings('clicaqui',5);
                 resolve();
             },
             (_,err) => {
@@ -42,12 +42,32 @@ export const fetchSettings = () => {
     return promise;
 }
 
-export const insertSettings = () => {
+export const insertSettings = (user:string, limit:number) => {
 
     const promise = new Promise<void>((resolve, reject) => {
         database.transaction((tx) => {
-            tx.executeSql(`INSERT INTO settings VALUES ("clicaqui",5)`
-            ,[],
+            tx.executeSql(`INSERT INTO settings VALUES ( ? , ? )`
+            ,[user,limit],
+            (_, result) => {
+                console.log(result);
+                resolve();
+            },
+            (_, err) => {
+                reject(err);
+            });
+        });
+        
+    });
+
+    return promise;
+}
+
+export const updateSettings = (user:string, limit:number) => {
+
+    const promise = new Promise<void>((resolve, reject) => {
+        database.transaction((tx) => {
+            tx.executeSql(`UPDATE settings SET user = ? AND limit = ?`
+            ,[user, limit],
             (_, result) => {
                 console.log(result);
                 resolve();

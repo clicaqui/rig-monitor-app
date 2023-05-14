@@ -1,9 +1,7 @@
 import axios from "axios";
-import { useContext } from "react";
-
-export const getMiners = async () => {
+export const getMiners = async (limit:string) => {
     
-    return await axios.get('https://clicaqui-red.mybluemix.net/rig')
+    return await axios.get(`https://clicaqui-red.mybluemix.net/rig?limit=${limit}`)
     .then(response => { return response.data;})
     .catch(err => console.error(err));   
 }
