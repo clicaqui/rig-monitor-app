@@ -7,7 +7,7 @@ function InputText (props:any) {
     return(
         <View style={styles.field}>
             <Text style={styles.label}>{props.label}</Text>
-            <TextInput style={styles.text} keyboardType={props.type} onChangeText={props.onChangeTextHandler} value={props.text} />
+            <TextInput style={styles.text} {...props.inputConfig} />
         </View>
     );
 }

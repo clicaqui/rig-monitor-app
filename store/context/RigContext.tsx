@@ -16,20 +16,20 @@ function RigContextProvider(props:any) {
     const [lstTransactions, setLstTransactions] = useState([]);
     const [prices, setPrices] = useState([]);
     const [settings, setSettings] = useState({});
-    
-
+        
     useEffect(() => {
         reload();
-    },[settings])
-  
-    useEffect(() => {
+        loadSettings();
+    },[])
+
+    function loadSettings (): void {
         fetchSettings().then((result) => {
             let configSettings = new Settings();
             configSettings.user =  result[0].user;
             configSettings.limit =  result[0].transactionLimit;
             setSettings(configSettings);
         });
-    },[])
+    }
 
     const reload = async () => {
    

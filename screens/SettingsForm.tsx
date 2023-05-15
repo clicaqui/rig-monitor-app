@@ -1,35 +1,53 @@
 import { View, StyleSheet, Button } from "react-native";
 import InputText from "../components/UI/InputText";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { GlobalStyles } from "../constants/styles";
 import { RigContext } from "../store/context/RigContext";
+import { updateSettings } from "../util/database";
+import { useNavigation } from "@react-navigation/native";
 
-const SettingsForm = () => {
+const SettingsForm = (props:any) => {
+    const navigation = useNavigation();
     const rigCtx = useContext(RigContext);
-    const [user, setUser] = useState(rigCtx.settings.user);
-    const [limit, setLimit] = useState(rigCtx.settings.limit.toString());
+    const [settings, setSettings] = useState({
+        user: rigCtx.settings.user,
+        limit: rigCtx.settings.limit.toString()
+    });
 
     //  useEffect( () => {
     //      setUser(rigCtx.settings.user);
     //      setLimit(rigCtx.settings.limit.toString())
     //  },[user, limit]);
 
-    const onChangeUserHandler = (text:string) => {
-        setUser(text);
+    const onChangeTextHandler = (inputSettingsValues:any, enteredValue:string) => {
+        setSettings((curInputValues) => {
+            //console.log(curInputValues)
+            return { ...curInputValues,
+                [inputSettingsValues]: enteredValue
+            }
+        });
     }  
-    const onChangeLimitHandler = (text:string) => {
-        setLimit(text);
-    }   
 
-    const saveSettings = () => {
-        
+    async function saveSettings () {
+        return await updateSettings(settings.user,settings.limit)
+            .then(() => {
+                navigation.goBack();
+            });
     }
  
     return (<View style={styles.container}>
-        <InputText label="Duino User" onChangeTextHandler={onChangeUserHandler} text={user} type="text"/>
-        <InputText label="Show Transactions linit" onChangeTextHandler={onChangeLimitHandler} text={limit} type="number-pad" />
+        <InputText label="Duino User" inputConfig={{
+                    onChangeText:onChangeTextHandler.bind(this, 'user'),
+                    value:settings.user,
+                    keyboardType:"text"
+                }}/>
+        <InputText label="Show Transactions linit"  inputConfig={{ 
+                    onChangeText:onChangeTextHandler.bind(this, 'limit'),
+                    value:settings.limit,
+                    keyboardType:"number-pad" 
+                }} />
         <View>
-            <Button title="Save" onPress={() => saveSetttings()} />
+            <Button title="Save" onPress={saveSettings} />
         </View>
     </View>);
 }

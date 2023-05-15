@@ -62,12 +62,12 @@ export const insertSettings = (user:string, limit:number) => {
     return promise;
 }
 
-export const updateSettings = (user:string, limit:number) => {
+export const updateSettings = (user:string, limit:string) => {
 
     const promise = new Promise<void>((resolve, reject) => {
         database.transaction((tx) => {
-            tx.executeSql(`UPDATE settings SET user = ? AND limit = ?`
-            ,[user, limit],
+            tx.executeSql(`UPDATE settings SET transactionLimit = ? WHERE user = ?`
+            ,[parseInt(limit),user],
             (_, result) => {
                 console.log(result);
                 resolve();
