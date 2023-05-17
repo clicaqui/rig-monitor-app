@@ -4,7 +4,7 @@ import { GlobalStyles } from "../constants/styles";
 function TransactionCard(props:any) {
     return ( <View style={styles.minerItem}>
         <View>
-            <Text style={styles.memo}>{(props.memo).substring(0,30)}</Text>
+            <Text style={styles.memo}>{(props.memo).split(" ")[0]}</Text>
             <Text style={styles.date}>{props.date}</Text>
         </View>
         <View style={styles.amountContainer}>

@@ -18,11 +18,11 @@ const MinersList = (props:any) => {
         setRefreshing(false);
     }
     return (
-        <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
-            <FlatList  data={props.miners} renderItem={renderedItem} 
+        <View>
+            <FlatList refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}  data={props.miners} renderItem={renderedItem} 
             keyExtractor={(item) => item.threadid} 
             onEndReached={props.onReload}/>
-        </ScrollView>
+        </View>
     );
 }
 
