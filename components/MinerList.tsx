@@ -1,5 +1,7 @@
-import { FlatList, Text, View, StyleSheet } from 'react-native';
+import { FlatList, Text, View, StyleSheet, ScrollView, RefreshControl } from 'react-native';
 import Miner from './Miner';
+import { useContext, useState } from 'react';
+import { RigContext } from '../store/context/RigContext';
 
 function renderedItem(itemData:any) {
     //console.log("====item " + itemData.item.identifier);
@@ -7,12 +9,20 @@ function renderedItem(itemData:any) {
 }
 
 const MinersList = (props:any) => {
+    const rigCtx = useContext(RigContext);
+    const [refreshing, setRefreshing] = useState(false);
+
+    function onRefresh() {
+        setRefreshing(true);
+        rigCtx.reloadData();
+        setRefreshing(false);
+    }
     return (
-        <View>
+        <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
             <FlatList  data={props.miners} renderItem={renderedItem} 
             keyExtractor={(item) => item.threadid} 
             onEndReached={props.onReload}/>
-        </View>
+        </ScrollView>
     );
 }
 

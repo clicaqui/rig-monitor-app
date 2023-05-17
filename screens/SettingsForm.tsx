@@ -1,10 +1,11 @@
-import { View, StyleSheet, Button } from "react-native";
+import { View, StyleSheet, Button, Alert } from "react-native";
 import InputText from "../components/UI/InputText";
-import { useContext, useState } from "react";
+import { useContext, useLayoutEffect, useState } from "react";
 import { GlobalStyles } from "../constants/styles";
 import { RigContext } from "../store/context/RigContext";
 import { updateSettings } from "../util/database";
 import { useNavigation } from "@react-navigation/native";
+import Settings from "../models/settings";
 
 const SettingsForm = (props:any) => {
     const navigation = useNavigation();
@@ -13,11 +14,6 @@ const SettingsForm = (props:any) => {
         user: rigCtx.settings.user,
         limit: rigCtx.settings.limit.toString()
     });
-
-    //  useEffect( () => {
-    //      setUser(rigCtx.settings.user);
-    //      setLimit(rigCtx.settings.limit.toString())
-    //  },[user, limit]);
 
     const onChangeTextHandler = (inputSettingsValues:any, enteredValue:string) => {
         setSettings((curInputValues) => {
@@ -29,10 +25,17 @@ const SettingsForm = (props:any) => {
     }  
 
     async function saveSettings () {
-        return await updateSettings(settings.user,settings.limit)
+        console.log('screenn ---'+settings.limit)
+        const response = await updateSettings(settings.user,settings.limit)
             .then(() => {
+                Alert.alert('This changes will be affect when you restart de app');
+
+                rigCtx.settingsConf();
+            }).finally(() => {
                 navigation.goBack();
+
             });
+        return response;    
     }
  
     return (<View style={styles.container}>

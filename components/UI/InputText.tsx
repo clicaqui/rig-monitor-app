@@ -17,7 +17,7 @@ export default InputText;
 const styles = StyleSheet.create({
     field: {
         //flexDirection: 'row',
-        padding: 24,
+        padding: 24
     },
     label: {
         fontWeight: 'bold',
@@ -31,6 +31,8 @@ const styles = StyleSheet.create({
         paddingVertical: 4,
         borderBottomColor: GlobalStyles.colors.primary700,
         borderBottomWidth: 2,
-        backgroundColor: GlobalStyles.colors.primary100
+        backgroundColor: GlobalStyles.colors.primary100,
+        borderRadius: 8
+
     }
 });

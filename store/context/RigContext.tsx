@@ -1,13 +1,14 @@
 import { createContext, useEffect, useState } from 'react';
 import { getMiners } from '../../util/http';
 import { fetchSettings } from '../../util/database';
-import Settings from '../../models/settings';
 
 export const RigContext = createContext({
     miners: [],
     balance: {},
     transactions: [],
-    settings: {}
+    settings: {},
+    settingsConf: () => {},
+    reloadData: () => {}
 });
 
 function RigContextProvider(props:any) {
@@ -18,29 +19,36 @@ function RigContextProvider(props:any) {
     const [settings, setSettings] = useState({});
         
     useEffect(() => {
-        reload();
         loadSettings();
     },[])
 
+    useEffect(() => {
+        if (settings.limit !== undefined){
+            console.log('reload--'+settings.limit);
+            reload();
+        }
+
+    },[settings]);
+
     function loadSettings (): void {
-        fetchSettings().then((result) => {
-            let configSettings = new Settings();
-            configSettings.user =  result[0].user;
-            configSettings.limit =  result[0].transactionLimit;
-            setSettings(configSettings);
-        });
+        const response = fetchSettings().then(async (result) => {
+            console.log('loading...');
+              await setSettings({...settings, 'user': result[0].user, 
+                        'limit': result[0].transactionLimit});
+         
+                    });
+          
     }
 
     const reload = async () => {
-   
-        const response = await getMiners(settings?.limit.toString());
+        const limit = settings.limit;
+        console.log('==>'+limit);
+        const response = await getMiners(limit);
         setLstMiners(response.result.miners);
         setVlrBalance(response.result.balance);
         setLstTransactions(response.result.transactions);
         setPrices(response.result.prices);
-        setTimeout(() => {
-            reload();
-        },10000);
+        return response;    
     };
 
     const value = {
@@ -48,7 +56,10 @@ function RigContextProvider(props:any) {
         balance: vlrBalance,
         transactions: lstTransactions,
         prices: prices,
-        settings: settings 
+        settings: settings,
+        settingsConf: loadSettings,
+        reloadData: reload
+
     };
     return (
     <RigContext.Provider value={value}>

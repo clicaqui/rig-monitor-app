@@ -11,7 +11,7 @@ export function init() {
                     transactionLimit INTEGER NOT NULL)`,
             [],
             () => {
-                insertSettings('clicaqui',5);
+                //insertSettings('clicaqui',5);
                 resolve();
             },
             (_,err) => {
@@ -29,7 +29,7 @@ export const fetchSettings = () => {
             tx.executeSql(`SELECT user, transactionLimit FROM settings`
             ,[],
             (_, result) => {
-                console.log(result);
+                //console.log(result);
                 resolve(result.rows._array);
             },
             (_, err) => {
@@ -70,7 +70,7 @@ export const updateSettings = (user:string, limit:string) => {
             ,[parseInt(limit),user],
             (_, result) => {
                 console.log(result);
-                resolve();
+                resolve(result.rows._array);
             },
             (_, err) => {
                 reject(err);
