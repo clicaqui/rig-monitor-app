@@ -1,5 +1,5 @@
 # rig-monitor-app
-Rig monitor to mobile devices
+Rig monitor based in DUCO API to mobile devices
 
 # First Press
 
